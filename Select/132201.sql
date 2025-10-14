@@ -1,0 +1,13 @@
+/* 12세 이하인 여자 환자 목록 출력하기 */
+
+SELECT PT_NAME, PT_NO, GEND_CD, AGE, CASE WHEN TLNO IS NULL THEN 'NONE' ELSE TLNO END AS TLNO
+FROM PATIENT
+WHERE AGE <= 12 AND GEND_CD = 'W'
+ORDER BY AGE DESC, PT_NAME ASC
+
+/*
+-- 조건문 --
+• SELECT 절에서 ~이면 A로, 아니면 B로 출력해라
+• CASE 조건절 END
+• 조건절 : WHEN 조건 THEN A ELSE B (IF 아님 주의)
+*/
