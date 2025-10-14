@@ -1,0 +1,29 @@
+/* 과일로 만든 아이스크림 고르기 */
+
+SELECT DISTINCT FH.FLAVOR
+FROM FIRST_HALF FH JOIN ICECREAM_INFO II
+ON FH.FLAVOR = II.FLAVOR
+WHERE TOTAL_ORDER > 3000 AND INGREDIENT_TYPE = 'fruit_based'
+ORDER BY TOTAL_ORDER DESC
+
+SELECT FLAVOR
+FROM FIRST_HALF FH NATURAL JOIN ICECREAM_INFO II
+WHERE TOTAL_ORDER > 3000 AND INGREDIENT_TYPE = 'fruit_based'
+ORDER BY TOTAL_ORDER DESC
+
+
+/*
+-- NATURL JOIN --
+• 공통된 컬럼에 대해 EQUI JOIN 실행
+• 어떤 컬럼이 JOIN 조건으로 쓰였는지 확인이 어렵기 때문에 실제로는 사용하지 않는게 좋을 듯
+• 문제 풀 때 두 테이블에서 공통된 컬럼이 한개만 존재할 때 유용할 듯
+
+FROM FIRST_HALF FH JOIN ICECREAM_INFO II ON FH.FLAVOR = II.FLAVOR 
+FROM FIRST_HALF FH NATURAL JOIN ICECREAM_INFO II
+
+
+-- JOIN --
+• JOIN이 NATURAL JOIN을 줄인건줄 알았는데 INNER JOIN을 줄인 명령어
+• 그래서 ON 절을 통한 조인 조건 명시가 필수
+• 조건을 명시하지 않으면 '카테시안 곱' 현상이 발생함
+*/
