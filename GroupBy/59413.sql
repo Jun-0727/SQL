@@ -1,0 +1,34 @@
+/* 입양 시각 구하기(2) */
+
+WITH RECURSIVE HOURS AS (
+    SELECT 0 AS HOUR
+    UNION ALL
+    SELECT HOUR + 1
+    FROM HOURS
+    WHERE HOUR < 23
+)
+
+SELECT HOUR, COUNT(ANIMAL_ID) AS COUNT
+FROM HOURS H 
+    LEFT JOIN ANIMAL_OUTS A
+    ON H.HOUR = HOUR(A.DATETIME)
+GROUP BY HOUR
+ORDER BY HOUR
+
+
+/* 
+## RECURSIVE CTE ##
+
+WITH RECURSIVE 테이블1 (...) AS 
+(
+    SELECT ...  -- Non Recursive 부분
+        UNION ALL 
+    SELECT ...  -- Recursive 부분
+    FROM 테이블1
+    WHERE 재귀 종료 조건
+)
+
+SELECT * 
+FROM 테이블1
+
+*/
