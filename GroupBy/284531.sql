@@ -1,0 +1,25 @@
+/* 노선별 평균 역 사이 거리 조회하기 */
+
+WITH SUBWAY_DISTANCE_CALCULATE AS (
+    SELECT 
+        ROUTE, 
+        ROUND(SUM(D_BETWEEN_DIST), 1) AS TOTAL_DIST, 
+        ROUND(AVG(D_BETWEEN_DIST), 2) AS AVERAGE_DIST
+    FROM SUBWAY_DISTANCE
+    GROUP BY ROUTE
+)
+
+SELECT 
+    ROUTE, 
+    CONCAT(TOTAL_DIST, 'km') AS TOTAL_DISTANCE, 
+    CONCAT(AVERAGE_DIST, 'km') AS AVERAGE_DISTANCE
+FROM SUBWAY_DISTANCE_CALCULATE
+ORDER BY TOTAL_DIST DESC
+
+/*
+-- ORDER BY 주의사항 --
+1. TOTAL_DISTANC를 내림차순 한 결과 출력이 목표
+2. CONCAT()을 통해 TOTAL_DISTANCE의 타입이 문자열로 바뀌었음
+3. 문자열이 아닌 실수(숫자)를 내림차순 해야 함
+4. CTE로 임시 테이블 생성
+*/
