@@ -1,0 +1,21 @@
+/* 특정 조건을 만족하는 물고기별 수와 최대 길이 구하기 */
+
+WITH FISH_INFO AS (
+    SELECT 
+        ID, 
+        FISH_TYPE, 
+        TIME,
+        CASE 
+            WHEN LENGTH IS NULL THEN 10
+            ELSE LENGTH 
+        END AS LENGTH
+    FROM FISH_INFO
+    )
+
+SELECT 
+    COUNT(FISH_TYPE) AS FISH_COUNT,
+    MAX(LENGTH) AS MAX_LENGTH,
+    FISH_TYPE
+FROM FISH_INFO
+GROUP BY FISH_TYPE HAVING AVG(LENGTH) >= 33
+ORDER BY FISH_TYPE
